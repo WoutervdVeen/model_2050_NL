@@ -1,0 +1,304 @@
+# NODES
+# for hydro only the provinces with large rivers have hydrogen
+# cavern potential only in groningen friesland drenthe: Assessment of underground energy storage potential to support the energy transition in the Netherlands. (2019). [Journal-article]. https://www.nlog.nl/sites/default/files/2023-01/juez_larre_et_al_2019_fb_st_july.pdf 
+#for onshorewind and solar the division is done based on the CORRECTED calculations in the excel file. The offshore wind is done with original calculations. discuss with Francesco
+##
+
+nodes:
+
+  NL11: # Groningen
+    longitude: 6.8779375
+    latitude: 53.151875
+    techs:
+        demand_power:
+        wind_onshore.flow_cap_max: 1699 # all in MW
+        # wind_offshore_DC.flow_cap_max: 0
+        # wind_offshore_AC.flow_cap_max: 0
+        solar_pv.flow_cap_max: 7959
+        li_ion_battery:
+        flow_ion_battery:
+        CAES.flow_cap_max: 69 #only pieterburen
+        hydrogen_cavern.flow_cap_max:  25700 #all but pieterburen
+        hydrogen_fuel_cell:
+        electrolyser:
+        hydro_ccgt_new:
+        hydro_ocgt_new:
+        hydro_ccgt_rebuilt.flow_cap_max: 3109 #from: https://data.open-power-system-data.org/
+        hydro_ocgt_rebuilt.flow_cap_max: 661 #from: https://data.open-power-system-data.org/
+        BECCS_rebuilt:
+        nuclear:
+        curtailment:
+        lost_load:
+        hydrogen_demand: 
+
+  NL12: # Friesland
+    longitude: 5.94212
+    latitude: 53.130320000000005
+    techs:
+        demand_power:
+        wind_onshore.flow_cap_max: 3292
+        wind_offshore_DC.flow_cap_max: 4000
+        wind_offshore_AC.flow_cap_max: 1300
+        solar_pv.flow_cap_max: 10892
+        li_ion_battery:
+        flow_ion_battery:
+        hydrogen_cavern.flow_cap_max: 4200 #ternaard
+        hydrogen_fuel_cell:
+        electrolyser:
+        hydro_ccgt_new:
+        hydro_ocgt_new:
+        hydro_ocgt_rebuilt.flow_cap_max: 144 #from: https://data.open-power-system-data.org/
+        BECCS_rebuilt:
+        nuclear:
+        curtailment:
+        lost_load:
+        hydrogen_demand: 
+
+  NL13: # Drenthe
+    longitude: 6.69054
+    latitude: 52.79966
+    techs:
+        demand_power:
+        wind_onshore.flow_cap_max: 1547 
+        solar_pv.flow_cap_max: 8573
+        li_ion_battery:
+        flow_ion_battery:
+        CAES.flow_cap_max: 3100 #all but hooghalen
+        hydrogen_cavern.flow_cap_max: 5000 #only hooghalen
+        hydrogen_fuel_cell:
+        electrolyser:
+        hydro_ccgt_new:
+        hydro_ocgt_new:
+        BECCS_rebuilt:
+        nuclear:
+        curtailment:
+        lost_load:
+        hydrogen_demand:  
+
+  NL21: # Overijssel
+    longitude: 6.442433333333334
+    latitude: 52.41295
+    techs:
+        demand_power:
+        wind_onshore.flow_cap_max: 1798 
+        solar_pv.flow_cap_max: 11104 
+        li_ion_battery:
+        flow_ion_battery:
+        hydrogen_fuel_cell:
+        electrolyser:
+        hydro_ccgt_new:
+        hydro_ocgt_new:
+        hydro_ocgt_rebuilt.flow_cap_max: 126 #from: https://data.open-power-system-data.org/
+        BECCS_rebuilt:
+        nuclear:
+        curtailment:
+        lost_load:
+        hydrogen_demand:  
+
+  NL22: # Gelderland
+    longitude: 6.012
+    latitude: 51.94764
+    techs:
+        demand_power:
+        wind_onshore.flow_cap_max: 2163
+        solar_pv.flow_cap_max: 13936 
+        li_ion_battery:
+        flow_ion_battery:
+        hydrogen_fuel_cell:
+        electrolyser:
+        hydro_ccgt_new:
+        hydro_ocgt_new:
+        BECCS_rebuilt:
+        nuclear:
+        hydro.flow_cap_max: 10 #source: https://www.microhydropower.net/nl/index_uk.php --> this means no extra hydrogen in NL
+        curtailment:
+        lost_load:
+        hydrogen_demand:  
+
+  NL23: # Flevoland
+    longitude: 5.672633333333333
+    latitude: 52.60066666666666
+    techs:
+        demand_power:
+        wind_onshore.flow_cap_max: 1406 
+        solar_pv.flow_cap_max: 4803
+        li_ion_battery:
+        flow_ion_battery:
+        hydrogen_fuel_cell:
+        electrolyser:
+        hydro_ccgt_new:
+        hydro_ocgt_new:
+        hydro_ocgt_rebuilt.flow_cap_max: 989 #from: https://data.open-power-system-data.org/
+        BECCS_rebuilt:
+        nuclear:
+        curtailment:
+        lost_load:
+        hydrogen_demand:  
+
+  NL31: # Utrecht
+    longitude: 4.9873
+    latitude: 52.1608
+    techs:
+        demand_power:
+        wind_onshore.flow_cap_max: 766
+        solar_pv.flow_cap_max: 5151 
+        li_ion_battery:
+        flow_ion_battery:
+        hydrogen_fuel_cell:
+        electrolyser:
+        hydro_ccgt_new:
+        hydro_ocgt_new:
+        hydro_ocgt_rebuilt.flow_cap_max: 247 #from: https://data.open-power-system-data.org/
+        BECCS_rebuilt:
+        nuclear:
+        hydro.flow_cap_max: 1.8 #source: https://www.microhydropower.net/nl/index_uk.php --> this means no extra hydrogen in NL
+        curtailment:
+        lost_load:
+        hydrogen_demand:  
+
+  NL32: # Noord Holland
+    longitude: 4.748033333333333
+    latitude: 52.36538333333333
+    techs:
+        demand_power:
+        wind_onshore.flow_cap_max: 2162
+        wind_offshore_DC.flow_cap_max: 6000
+        wind_offshore_AC.flow_cap_max: 6978
+        solar_pv.flow_cap_max: 8882
+        li_ion_battery:
+        flow_ion_battery:
+        hydrogen_fuel_cell:
+        electrolyser:
+        hydro_ccgt_new:
+        hydro_ocgt_new:
+        hydro_ccgt_rebuilt.flow_cap_max: 1950 #from: https://data.open-power-system-data.org/
+        hydro_ocgt_rebuilt.flow_cap_max: 397 #from: https://data.open-power-system-data.org/
+        BECCS_rebuilt:
+        nuclear:
+        curtailment:
+        lost_load:
+        hydrogen_demand:  
+
+  NL33: # Zuid Holland
+    longitude: 4.452383333333334
+    latitude: 51.95356666666667
+    techs:
+        demand_power:
+        wind_onshore.flow_cap_max: 1690 
+        wind_offshore_AC.flow_cap_max: 3640
+        solar_pv.flow_cap_max: 9156
+        li_ion_battery:
+        flow_ion_battery:
+        hydrogen_fuel_cell:
+        electrolyser:
+        hydro_ccgt_new:
+        hydro_ocgt_new:
+        hydro_ccgt_rebuilt.flow_cap_max: 1446 #from: https://data.open-power-system-data.org/
+        hydro_ocgt_rebuilt.flow_cap_max: 354 #from: https://data.open-power-system-data.org/
+        BECCS_rebuilt:
+        nuclear:
+        hydro.flow_cap_max: 14 #source: https://www.microhydropower.net/nl/index_uk.php --> this means no extra hydrogen in NL
+        curtailment:
+        lost_load:
+        hydrogen_demand:  
+
+  NL34: # Zeeland
+    longitude: 4.2185
+    latitude: 51.4261
+    techs:
+        demand_power:
+        wind_onshore.flow_cap_max: 1613 
+        wind_offshore_AC.flow_cap_max: 752
+        solar_pv.flow_cap_max: 5547
+        li_ion_battery:
+        flow_ion_battery:
+        hydrogen_fuel_cell:
+        electrolyser:
+        hydro_ccgt_new:
+        hydro_ocgt_new:
+        hydro_ccgt_rebuilt.flow_cap_max: 1212 #from: https://data.open-power-system-data.org/
+        hydro_ocgt_rebuilt.flow_cap_max: 489 #from: https://data.open-power-system-data.org/
+        BECCS_rebuilt:
+        nuclear.flow_cap_min: 500
+        curtailment:
+        lost_load:
+        hydrogen_demand:  
+
+  NL41: # Noord Brabant
+    longitude: 5.135325
+    latitude: 51.573025
+    techs:
+        demand_power:
+        wind_onshore.flow_cap_max: 2573 
+        solar_pv.flow_cap_max: 16768
+        li_ion_battery:
+        flow_ion_battery:
+        hydrogen_fuel_cell:
+        electrolyser:
+        hydro_ccgt_new:
+        hydro_ocgt_new:
+        hydro_ccgt_rebuilt.flow_cap_max: 774 #from: https://data.open-power-system-data.org/
+        BECCS_rebuilt:
+        nuclear:
+        curtailment:
+        lost_load:
+        hydrogen_demand:  
+
+  NL42: # Limburg
+    longitude: 5.9052
+    latitude: 51.1524
+    techs:
+        demand_power:
+        wind_onshore.flow_cap_max: 1090 
+        solar_pv.flow_cap_max: 7230 
+        li_ion_battery:
+        flow_ion_battery:
+        hydrogen_fuel_cell:
+        electrolyser:
+        hydro_ccgt_new:
+        hydro_ocgt_new:
+        hydro_ccgt_rebuilt.flow_cap_max: 1155 #from: https://data.open-power-system-data.org/
+        hydro_ocgt_rebuilt.flow_cap_max: 700 #from: https://data.open-power-system-data.org/
+        BECCS_rebuilt:
+        nuclear:
+        hydro.flow_cap_max: 11.5 #source: https://www.microhydropower.net/nl/index_uk.php --> this means no extra hydrogen in NL
+        curtailment:
+        lost_load:
+        hydrogen_demand:  
+
+  BEL:
+    longitude: 4.378136579035989
+    latitude: 51.31726620661365
+    techs:
+        import_power:
+        export_power:
+       
+  NOR:
+    latitude: 58.0951126628901
+    longitude: 6.6210454502746705
+    techs:
+        import_power:
+        export_power:
+        
+  DEU:
+    latitude: 52.02040854483887
+    longitude: 7.279926060167003
+    techs:
+        import_power:
+        export_power:
+      
+  DNK:
+    longitude: 8.401542890776913
+    latitude: 55.4325571130993
+    techs:
+        import_power:
+        export_power:
+        
+  GBR:
+    longitude: 0.8455375006800074
+    latitude: 51.41852859078181
+    techs:
+        import_power:
+        export_power:
+        
+    

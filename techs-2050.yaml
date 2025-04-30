@@ -1,0 +1,584 @@
+##
+# TECHNOLOGY DEFINITIONS
+##
+
+templates:
+    interest_rate_setter:
+      cost_interest_rate:
+        data: 0.1  # average wind onshore WACC OECD from [@Steffen:2019]
+        index: monetary
+        dims: costs
+
+techs:
+
+  ##------------------------------------------------------------------------------------------
+  # Firm supply
+  ##------------------------------------------------------------------------------------------
+
+  # lost load
+  lost_load:  # dummy supply technology to represent lost load
+    name: 'Lost load'
+    color: '#030303'
+    base_tech: supply
+    template: interest_rate_setter
+    carrier_out: power
+    lifetime: 20
+    cost_flow_out:
+      data: 1e4 # kEUR per MWh, just a very high price, to make it the least attractive option
+      index: monetary
+      dims: costs
+    # lost load-end
+
+  # import power
+  import_power:  # dummy supply technology to represent import of power
+    name: 'Power Import'
+    color: '#ff31fe'
+    base_tech: supply
+    template: interest_rate_setter
+    carrier_out: power
+    lifetime: 20
+    cost_flow_out:
+      data: 0.1 # kEUR per MWh
+      index: monetary
+      dims: costs
+    # import power-end
+
+
+  hydro_ccgt_new:
+    name: "Combined cycle gas turbine hydrogen new" #new hydrogen plant
+    color: "#E37A72"
+    base_tech: supply
+    template: interest_rate_setter
+    carrier_in: hydrogen
+    carrier_out: power
+    flow_out_eff: 0.56
+    flow_ramping: 
+    lifetime: 30
+    cost_flow_cap:
+      data: 877  # kEUR per MW
+      index: monetary
+      dims: costs
+    cost_flow_out:
+      data: 0.00425 # kEUR per MWh
+      index: monetary
+      dims: costs
+    cost_flow_in:
+      data: 0.231 # kEUR per MWh (green hydrogen price international)
+      index: monetary
+      dims: costs
+    om_annual_investment_fraction:
+      data: 3.25 # fraction/total investment
+      index: monetary
+      dims: costs
+
+  hydro_ocgt_new:
+    name: "Open cycle gas turbine hydrogen new" #new hydrogen plant
+    color: "#6BA292"
+    base_tech: supply
+    template: interest_rate_setter
+    carrier_in: hydrogen
+    carrier_out: power
+    flow_out_eff: 0.55
+    flow_ramping: 1
+    lifetime: 30
+    cost_flow_cap:
+      data: 460   # kEUR per MW
+      index: monetary
+      dims: costs
+    cost_flow_out:
+      data: 0.00479 # kEUR per MWh
+      index: monetary
+      dims: costs
+    cost_flow_in:
+      data: 0.231 # kEUR per MWh (green hydrogen price international)
+      index: monetary
+      dims: costs
+    om_annual_investment_fraction:
+      data: 1.794 # fraction/total investment: OCGT - natural gas
+      index: monetary
+      dims: costs
+      
+
+  hydro_ccgt_rebuilt:
+    name: "Combined cycle gas turbine hydrogen rebuilt" #rebuilt hydrogen plant
+    color: "#E37A72"
+    base_tech: supply
+    template: interest_rate_setter
+    carrier_in: hydrogen
+    carrier_out: power
+    flow_out_eff: 0.59
+    flow_ramping: 
+    lifetime: 30
+    cost_flow_cap:
+      data: 182  # kEUR per MW
+      index: monetary
+      dims: costs
+    cost_flow_out:
+      data: 0.00425 # kEUR per MWh
+      index: monetary
+      dims: costs
+    cost_flow_in:
+      data: 0.231 # kEUR per MWh (green hydrogen price international)
+      index: monetary
+      dims: costs
+    om_annual_investment_fraction:
+      data: 3.25 # fraction/total investment
+      index: monetary
+      dims: costs
+      
+
+  hydro_ocgt_rebuilt:
+    name: "Open cycle gas turbine hydrogen rebuilt" #rebuilt hydrogen plant
+    color: "#6BA292"
+    base_tech: supply
+    template: interest_rate_setter
+    carrier_in: hydrogen
+    carrier_out: power
+    flow_out_eff: 0.42
+    flow_ramping: 1
+    lifetime: 30
+    cost_flow_cap:
+      data: 182   # kEUR per MW
+      index: monetary
+      dims: costs
+    cost_flow_out:
+      data: 0.00479 # kEUR per MWh
+      index: monetary
+      dims: costs
+    cost_flow_in:
+      data: 0.231 # kEUR per MWh (green hydrogen price international)
+      index: monetary
+      dims: costs
+    om_annual_investment_fraction:
+      data: 1.794 # fraction/total investment: OCGT - natural gas
+      index: monetary
+      dims: costs
+
+  BECCS_rebuilt:
+    name: "Bioenergy with carbon capture and storage rebuilt" #rebuilt BECCS plant
+    color: "#E37A72"
+    base_tech: supply
+    template: interest_rate_setter
+    carrier_out: power
+    flow_out_eff: 0.32
+    flow_ramping: 
+    lifetime: 40
+    cost_flow_cap:
+      data: 2758  # kEUR per MW (scenariostudie kernenergie)
+      index: monetary
+      dims: costs
+    cost_flow_out:
+      data: 0.00422 # kEUR per MWh
+      index: monetary
+      dims: costs
+    cost_flow_in:
+      data: 0.060 # kEUR per MWh (IEA Biomass)
+      index: monetary
+      dims: costs
+    om_annual_investment_fraction:
+      data: 6 # fraction/total investment (scenariostudie kernenergie)
+      index: monetary
+      dims: costs
+
+  nuclear:
+    name: "Nuclear gas plant" 
+    color: "#B1B695"
+    base_tech: supply
+    carrier_out: power
+    #source_use_max: 15000 # looks like the wrong implementation here, look for the right one
+    flow_out_eff: 0.35
+    flow_ramping: 0.8
+    lifetime: 60
+    cost_flow_cap:
+      data: 4100  # kEUR per MW: scenariostudie kernenergie
+      index: monetary
+      dims: costs
+    cost_flow_out:
+      data: 0.004 # kEUR per MWh: scenariostudie kernenergie
+      index: monetary
+      dims: costs
+    cost_flow_in:
+      data: 0.008 # kEUR per MWh (Uranium price)
+      index: monetary
+      dims: costs
+    om_annual_investment_fraction:
+      data: 2.195 # fraction/total investment (scenariostudie kernenergie)
+      index: monetary
+      dims: costs
+
+  SMR: #big SMR is 300MWe/unit, small is 50MWe/unit
+    name: "Small modular reactor" 
+    color: "#B72406"
+    base_tech: supply
+    carrier_out: power
+#    source_use_max: 15000
+    flow_out_eff: 0.35
+    flow_ramping: 0.9
+    lifetime: 60
+    cost_flow_cap:
+      data: 2700  # kEUR per MW --> scenariostudie kernenergie
+      index: monetary
+      dims: costs
+    cost_flow_out:
+      data: 0.004 # kEUR per MWh: scenariostudie kernenergie
+      index: monetary
+      dims: costs
+    cost_flow_in:
+      data: 0.0082 # kEUR per MWh (Uranium price)
+      index: monetary
+      dims: costs
+    om_annual_investment_fraction:
+      data: 2.195 # fraction/total investment (scenariostudie kernenergie)
+      index: monetary
+      dims: costs
+
+  hydro:
+    name: "Hydropower plant" 
+    color: "#FA824C"
+    base_tech: supply
+    carrier_out: power
+    energy_cap_max: 38 #MW of installed hydro
+    flow_out_eff: 0.9
+    flow_ramping: 1
+    lifetime: 80
+    cost_flow_cap:
+      data: 2.45  # kEUR per MW
+      index: monetary
+      dims: costs
+    cost_flow_out:
+      data: 0.00 # kEUR per MWh
+      index: monetary
+      dims: costs
+    cost_flow_in:
+      data: 0.00 # kEUR per MWh (water)
+      index: monetary
+      dims: costs
+    om_annual_investment_fraction:
+      data: 2.2 # fraction/total (scenariostudie kernenergie)
+      index: monetary
+      dims: costs
+
+ 
+  ##------------------------------------------------------------------------------------------
+  # Variable renewable supply
+  ##------------------------------------------------------------------------------------------
+
+  solar_pv:
+    name: "Solar photovoltaic power"
+    color: "#F9D956"
+    base_tech: supply
+    template: interest_rate_setter
+    carrier_out: power
+    source_unit: per_cap
+    lifetime: 40 
+    cost_flow_cap:
+      data: 410 # kEUR per MWW
+      index: monetary
+      dims: costs
+    cost_flow_out:
+      data:  0.00 # kEUR per MWh
+      index: monetary
+      dims: costs
+    om_annual_investment_fraction:
+      data: 1.829 # fraction/total investment: rooftop PV comm.&industrial
+      index: monetary
+      dims: costs
+
+  wind_onshore:
+    name: "Wind power onshore"
+    color: "#56F9C0"
+    base_tech: supply
+    template: interest_rate_setter
+    carrier_out: power
+    source_unit: per_cap
+    lifetime: 30 
+    cost_flow_cap:
+      data: 1090 # kEUR per MW
+      index: monetary
+      dims: costs
+    cost_flow_out:
+      data: 0.001508 # kEUR per MW
+      index: monetary
+      dims: costs
+    om_annual_investment_fraction:
+      data: 1.431 # fraction/total investment
+      index: monetary
+      dims: costs
+
+
+  wind_offshore_DC:
+    name: "Wind power offshore direct current"
+    color: "#56CBF9"
+    base_tech: supply
+    template: interest_rate_setter
+    carrier_out: power
+    source_unit: per_cap
+    lifetime: 30 
+    cost_flow_cap:
+      data: 2876 # kEUR per MW
+      index: monetary
+      dims: costs
+    cost_flow_out:
+      data: 0.00278 # kEUR per MW
+      index: monetary
+      dims: costs
+    om_annual_investment_fraction:
+      data: 0.976 # fraction/total investment
+      index: monetary
+      dims: costs
+      
+
+  wind_offshore_AC:
+    name: "Wind power offshore alternating current"
+    color: "#56CBF9"
+    base_tech: supply
+    template: interest_rate_setter
+    carrier_out: power
+    source_unit: per_cap
+    lifetime: 30 
+    cost_flow_cap:
+      data: 1986 # kEUR per MW
+      index: monetary
+      dims: costs
+    cost_flow_out:
+      data: 0.00278 # kEUR per MW
+      index: monetary
+      dims: costs
+    om_annual_investment_fraction:
+      data: 1.407 # fraction/total investment
+      index: monetary
+      dims: costs
+
+      
+  ##------------------------------------------------------------------------------------------
+  # Storage
+  ##------------------------------------------------------------------------------------------
+
+  # battery storage
+
+  li_ion_battery:
+    name: 'Li-ion Battery storage'
+    color: '#33F6FF'            
+    base_tech: storage
+    template: interest_rate_setter
+    carrier_in: power
+    carrier_out: power    
+    storage_discharge_depth: 0.15
+    lifetime: 15  # 3000 charge cycles
+    flow_cap_per_storage_cap_max: 0.25 #takes 4 hours for discharging 
+    flow_out_eff: 0.95
+    flow_in_eff: 0.95
+    storage_loss: 0.0041  # 1% loss per hour assumedcosts:
+    cost_storage_cap: 
+      data: 125 # kEUR per MWh
+      index: monetary
+      dims: costs
+    cost_om_annual_investment_fraction: 
+      data: 0.211 # fraction/total investment
+      index: monetary
+      dims: costs
+    cost_flow_out: 
+      data: 0.00170 # kEUR/MWh
+      index: monetary
+      dims: costs
+
+  flow_ion_battery:
+    name: 'Flow-ion Battery storage'
+    color: '#33F6FF'            
+    base_tech: storage
+    template: interest_rate_setter
+    carrier_in: power
+    carrier_out: power    
+    storage_discharge_depth: 0.1
+    lifetime: 13  # 3000 charge cycles
+    flow_cap_per_storage_cap_max: 0.1 #takes  hours for discharging 
+    flow_out_eff: 0.95
+    flow_in_eff: 0.95
+    storage_loss: 0.00  # 0% loss per hour assumedcosts:
+    cost_storage_cap: 
+      data: 160 # kEUR per MWh
+      index: monetary
+      dims: costs
+    cost_om_annual_investment_fraction: 
+      data: 1.5 # FOM %
+      index: monetary
+      dims: costs
+    cost_flow_out: 
+      data: 0.00096 # kEUR/MWh
+      index: monetary
+      dims: costs
+  # battery storage-end
+
+
+  # mechanical storage --> WHAT DO WE DO WITH THIS MAYBE GRAVITY BASED STORAGE
+  # mechanical_storage:
+  #   name: 'mechanical storage long term CAES' #long-term mechanical storage longer then 24h
+  #   color: '#33F6FF'            
+  #   base_tech: storage
+  #   template: interest_rate_setter
+  #   carrier_in: power
+  #   carrier_out: power    
+  #   storage_discharge_depth: 0.1
+  #   lifetime: 60 # 
+  #   flow_cap_per_storage_cap_max: 0.0167 # 
+  #   flow_out_eff: 0.65
+  #   flow_in_eff: 1
+  #   storage_loss: 0.00  # 0% loss per hour assumedcosts:
+  #   cost_storage_cap: 
+  #     data: 50 # kEUR per MWh
+  #     index: monetary
+  #     dims: costs
+  #   cost_om_annual_investment_fraction: 
+  #     data: 26.22 # 
+  #     index: monetary
+  #     dims: costs
+  #   cost_flow_out: 
+  #     data: 0.00 # kEUR/MWh
+  #     index: monetary
+  #     dims: costs
+  
+  CAES:
+    name: "compressed air energy storage"
+    color: "#F593D4"
+    base_tech: storage
+    carrier_in: power
+    carrier_out: power
+    storage_discharge_depth: 1.0  # full discharge possible
+    storage_loss: 0.001  # negligible losses
+    flow_cap_per_storage_cap_max: 0.10  # 10% of capacity per day withdrawal rate
+    lifetime: 40
+    cost_storage_cap:
+      data: 851  # kEUR per MWh
+      index: monetary
+      dims: costs
+    cost_om_annual_investment_fraction:
+      data: 0.3063 #fraction/total investment 
+      index: monetary
+      dims: costs
+    cost_flow_out:
+      data: 0.002616  # kEUR per MWh (low operational cost)
+      index: monetary
+      dims: costs
+  # mechanical storage-end
+
+  # underground hydrogen storage
+  hydrogen_cavern:
+    name: "Underground hydrogen storage"
+    color: "#A5D6A7"
+    base_tech: storage
+    carrier_in: hydrogen
+    carrier_out: hydrogen
+    storage_discharge_depth: 1.0  # full discharge possible
+    storage_loss: 0.001  # negligible losses
+    flow_cap_per_storage_cap_max: 0.10  # 10% of capacity per day withdrawal rate
+    lifetime: 50
+    cost_storage_cap:
+      data: 1.28  # kEUR per MWh
+      index: monetary
+      dims: costs
+    cost_om_annual_investment_fraction:
+      data: 0.000001127  # frachtion/total investment
+      index: monetary
+      dims: costs
+    cost_flow_out:
+      data: 0.00001443  # kEUR per MWh (low operational cost)
+      index: monetary
+      dims: costs
+  # underground hydrogen storage-end
+  
+  hydrogen_fuel_cell:
+    name: "Hydrogen Fuel Cell"
+    color: "#CA0EF0"
+    base_tech: conversion
+    carrier_in: hydrogen
+    carrier_out: power
+    flow_out_eff: 0.5  # electrical efficiency
+    flow_ramping: 1.0   # fast response capability
+    lifetime: 10        # in years
+    cost_flow_cap:
+      data: 850  # kEUR per MW (capex per kW = 1100 €/kW)
+      index: monetary
+      dims: costs
+    cost_om_annual_investment_fraction:
+      data: 5.00  # fixed O&M/nominal investment
+      index: monetary
+      dims: costs
+    cost_flow_out:
+      data: 0.00  # variable O&M cost per MWh
+      index: monetary
+      dims: costs
+
+  ##------------------------------------------------------------------------------------------
+  # Electrolyser
+  ##------------------------------------------------------------------------------------------
+  electrolyser:
+    name: "Alkaline electrolyser 10MW plant"
+    color: "#CF226D"
+    base_tech: conversion
+    carrier_in: power
+    carrier_out: hydrogen
+    lifetime: 25 #DEA
+    flow_out_eff: 0.7 #https://www.sciencedirect.com/topics/engineering/alkaline-electrolysis
+    cost_flow_cap:
+      data: 275  # kEUR per MW --> scenariostudie kernenergie
+      index: monetary
+      dims: costs
+    cost_flow_in:
+      data: 0.00 # kEUR per MWh price of green power
+      index: monetary
+      dims: costs
+    cost_om_annual_investment_fraction:
+      data: 1.5 #BEIS21
+      index: monetary
+      dims: costs
+    
+
+
+  ##
+  # Demand
+  ##
+
+  demand_power:
+    name: "Power demand"
+    color: "#072486"
+    base_tech: demand
+    carrier_in: power
+
+  curtailment:
+    name: "Power curtailment"
+    color: "#70002a"
+    base_tech: demand
+    carrier_in: power
+    resource_use_max: 250000 # higher than peak demand
+
+  export_power:
+    name: "Power export"
+    color: "#ff31fe"
+    base_tech: demand
+    carrier_in: power
+    resource_use_max: 250000 # higher than peak demand (set to 115000)
+    cost_flow_in:
+      data: -0.1 # kEUR per MW (CHECK THE AVERAGE PRICE OF THE MARKET PER COUNTRY)
+      index: monetary
+      dims: costs
+
+  hydrogen_demand:
+    name: "Hydrogen demand"
+    color: "#098607"
+    base_tech: demand
+    carrier_in: hydrogen
+    #something flow out max
+    sink_use_max: 56000 #higher than the max demand on another dataset with fixed hydrogen demand
+    cost_flow_in:
+      data: -0.01 #kEUR per MW (I do not know this one, set cheap, because we use existing grid)
+      index: monetary
+      dims: costs
+
+
+    
+
+
+
+
+
+    

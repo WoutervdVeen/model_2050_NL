@@ -1,0 +1,62 @@
+overrides:
+  spores_mode:
+    config.init.broadcast_param_data: false
+    config.build.mode: spores
+    # The number of SPORES to generate:
+    config.solve.spores.number: 3
+    # The fraction above the cost-optimal cost to set the maximum cost during SPORES:
+    parameters.spores_slack: 0.1
+
+  define_spores_techs:
+    # templates:
+    #   add_spores_score:
+    #     # template: cost_dim_setter
+    #     cost_flow_cap:
+    #       data: [null, null]
+    #       index: ["monetary", "spores_score"]
+    #       dims: costs
+    #     cost_interest_rate:
+    #       data: [0.1, 1]
+    #       index: ["monetary", "spores_score"]
+    #       dims: costs
+
+
+
+    techs:
+      solar_pv:
+        # template: add_spores_score
+        cost_flow_cap:
+          data: [410,0]
+          index: ["monetary","spores_score"]
+          dims: costs
+      wind_onshore:
+        # template: add_spores_score
+        cost_flow_cap:
+          data: [1090,0]
+          index: ["monetary","spores_score"]
+          dims: costs
+      wind_offshore_AC:
+        # template: add_spores_score
+        cost_flow_cap:
+          data: [1986,0]
+          index: ["monetary","spores_score"]
+          dims: costs
+      wind_offshore_DC:
+        # template: add_spores_score
+        cost_flow_cap:
+          data: [2876,0]
+          index: ["monetary","spores_score"]
+          dims: costs
+
+          
+      # wind_onshore:
+      #   template: add_spores_score
+      #   # cost_flow_cap.data: [1090,0]
+      # wind_offshore_DC:
+      #   template: add_spores_score
+      #   # cost_flow_cap.data: [2876,0]
+      # wind_offshore_AC:
+      #   template: add_spores_score
+      #   # cost_flow_cap.data: [1986,0]
+          
+          

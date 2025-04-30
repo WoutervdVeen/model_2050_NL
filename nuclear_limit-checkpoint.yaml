@@ -1,0 +1,4 @@
+constraints:
+  max_nuclear_yearly_flow:
+    equations:
+      - expression: sum(flow_out[carriers=power, techs=nuclear], over=[timesteps,nodes]) <= 15800000
