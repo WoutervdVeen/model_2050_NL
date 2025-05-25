@@ -32,22 +32,34 @@ techs:
   # import power
   import_power:  # dummy supply technology to represent import of power
     name: 'Power Import'
-    color: '#ff31fe'
+    color: '#12b7e0'
     base_tech: supply
     template: interest_rate_setter
     carrier_out: power
     lifetime: 20
     cost_flow_out:
-      data: 0.1 # kEUR per MWh
+      data:  0.1 # kEUR per MWh
       index: monetary
       dims: costs
     # import power-end
+    
+  # # # import power hydrogen
+  # import_hydrogen:
+  #   name: "Hydrogen import"
+  #   color: '#ff31fe'
+  #   base_tech: supply
+  #   carrier_out: hydrogen
+  #   cost_flow_out:
+  #     data: 0.231  # kEUR per MWh or another external price
+  #     index: monetary
+  #     dims: costs
+  # #   # import hydrogen-end
 
 
   hydro_ccgt_new: #data: Gas turbine, combined cycle - extraction - natural gas - large (DEA)
     name: "Combined cycle gas turbine hydrogen new" #new hydrogen plant
     color: "#24823E"
-    base_tech: supply
+    base_tech: conversion
     template: interest_rate_setter
     carrier_in: hydrogen
     carrier_out: power
@@ -74,7 +86,7 @@ techs:
   hydro_ocgt_new: #Gas turbine, open cycle - back pressure - natural gas - medium (DEA)
     name: "Open cycle gas turbine hydrogen new" #new hydrogen plant
     color: "#D41616"
-    base_tech: supply
+    base_tech: conversion
     template: interest_rate_setter
     carrier_in: hydrogen
     carrier_out: power
@@ -102,7 +114,7 @@ techs:
   hydro_ccgt_rebuilt:
     name: "Combined cycle gas turbine hydrogen rebuilt" #rebuilt hydrogen plant
     color: "#32A852"
-    base_tech: supply
+    base_tech: conversion
     template: interest_rate_setter
     carrier_in: hydrogen
     carrier_out: power
@@ -130,7 +142,7 @@ techs:
   hydro_ocgt_rebuilt:
     name: "Open cycle gas turbine hydrogen rebuilt" #rebuilt hydrogen plant
     color: "#6BA292"
-    base_tech: supply
+    base_tech: conversion
     template: interest_rate_setter
     carrier_in: hydrogen
     carrier_out: power
@@ -180,6 +192,33 @@ techs:
       data: 6 # %CAPEX /jaar (scenariostudie kernenergie)
       index: monetary
       dims: costs
+
+  # BECCS:
+  #   name: "Bioenergy with carbon capture and storage" 
+  #   color: "#E37A72"
+  #   base_tech: supply
+  #   template: interest_rate_setter
+  #   carrier_out: power
+  #   flow_out_eff: 0.32
+  #   flow_ramping:
+  # #  flow_cap_max_systemwide: 20000 #MW
+  #   lifetime: 25
+  #   cost_flow_cap:
+  #     data: 3126  # kEUR per MW (scenariostudie kernenergie)
+  #     index: monetary
+  #     dims: costs
+  #   cost_flow_out:
+  #     data: 0.00422 # kEUR per MWh (scenariostudie kernenergie)
+  #     index: monetary
+  #     dims: costs
+  #   cost_flow_in:
+  #     data: 0.060 # kEUR per MWh (IEA Biomass)
+  #     index: monetary
+  #     dims: costs
+  #   om_annual_investment_fraction:
+  #     data: 6 # %CAPEX /jaar (scenariostudie kernenergie)
+  #     index: monetary
+  #     dims: costs
 
   nuclear:
     name: "Nuclear gas plant" 
@@ -381,6 +420,7 @@ techs:
       data: 0.00170 # kEUR/MWh
       index: monetary
       dims: costs
+    
 
   flow_ion_battery:
     name: 'Flow-ion Battery storage' #vanadium redox flow
@@ -394,7 +434,7 @@ techs:
     flow_cap_per_storage_cap_max: 0.1 #takes 10 hours for discharging 
     flow_out_eff: 0.78
     flow_in_eff: 0.99
-    storage_loss: 0.00  # 0% loss per hour assumedcosts:
+    storage_loss: 0.001  # 0% loss per hour assumedcosts: 0.1%, otherwise it does not discharge
     cost_storage_cap: 
       data: 350 # kEUR per MWh
       index: monetary
@@ -407,6 +447,7 @@ techs:
       data: 0.00096 # kEUR/MWh
       index: monetary
       dims: costs
+    
   # battery storage-end
   
   CAES:
@@ -417,7 +458,7 @@ techs:
     carrier_out: power
     storage_discharge_depth: 1.0  # full discharge possible
     storage_loss: 0.001  # negligible losses
-    flow_cap_per_storage_cap_max: 0.10  # 10% of capacity per day withdrawal rate
+    flow_cap_per_storage_cap_max: 0.10  # 10% of capacity per day withdrawal rate (THIS SHOULD BE PER HOUR)
     lifetime: 40
     cost_storage_cap:
       data: 851  # kEUR per MWh
@@ -492,7 +533,7 @@ techs:
     lifetime: 25 #DEA
     flow_out_eff: 0.8 #scenariostudie kernenergie
     cost_flow_cap:
-      data: 395  # kEUR per MW scenariostudie kernenergie
+      data: 395  # kEUR per MW scenariostudie kernenergie (lijkt wat hoog, misschien 300?)
       index: monetary
       dims: costs
     cost_flow_in:
@@ -540,7 +581,7 @@ techs:
     base_tech: demand
     carrier_in: hydrogen
     #something flow out max
-    sink_use_max: 56000 #higher than the max demand on another dataset with fixed hydrogen demand
+    sink_use_max: 56000 #higher than the max demand on another dataset with fixed hydrogen demand 
     cost_flow_in:
       data: -0.019 #kEUR per MWh (price of hydrogen will be around 3 dollars/kg, 1kg = 33.3kWh, this gives 90.9 dollars/MWh
       index: monetary

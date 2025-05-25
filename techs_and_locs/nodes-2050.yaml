@@ -15,8 +15,8 @@ nodes:
         wind_offshore_DC.flow_cap_max: 0
         wind_offshore_AC.flow_cap_max: 0
         solar_pv.flow_cap_max: 7959
-        li_ion_battery:
-        flow_ion_battery:
+        li_ion_battery: 
+        flow_ion_battery: 
         CAES.flow_cap_max: 69 #only pieterburen
         hydrogen_cavern.flow_cap_max:  25700 #all but pieterburen
         hydrogen_fuel_cell:
@@ -31,6 +31,7 @@ nodes:
         lost_load:
         hydrogen_demand: 
         SMR:
+        # BECCS:
 
   NL12: # Friesland
     longitude: 5.94212
@@ -38,11 +39,11 @@ nodes:
     techs:
         demand_power:
         wind_onshore.flow_cap_max: 3292
-        wind_offshore_DC.flow_cap_max: 4000
-        wind_offshore_AC.flow_cap_max: 1300
+        wind_offshore_DC.flow_cap_max: 16000
+        wind_offshore_AC.flow_cap_max: 11300
         solar_pv.flow_cap_max: 10892
-        li_ion_battery:
-        flow_ion_battery:
+        li_ion_battery: 
+        flow_ion_battery: 
         hydrogen_cavern.flow_cap_max: 4200 #ternaard
         hydrogen_fuel_cell:
         electrolyser:
@@ -55,6 +56,7 @@ nodes:
         curtailment:
         lost_load:
         hydrogen_demand: 
+        # BECCS:
 
   NL13: # Drenthe
     longitude: 6.69054
@@ -65,8 +67,8 @@ nodes:
         wind_offshore_DC.flow_cap_max: 0
         wind_offshore_AC.flow_cap_max: 0
         solar_pv.flow_cap_max: 8573
-        li_ion_battery:
-        flow_ion_battery:
+        li_ion_battery: 
+        flow_ion_battery: 
         CAES.flow_cap_max: 3100 #all but hooghalen
         hydrogen_cavern.flow_cap_max: 5000 #only hooghalen
         hydrogen_fuel_cell:
@@ -79,6 +81,7 @@ nodes:
         curtailment:
         lost_load:
         hydrogen_demand:  
+        # BECCS:
 
   NL21: # Overijssel
     longitude: 6.442433333333334
@@ -102,6 +105,7 @@ nodes:
         curtailment:
         lost_load:
         hydrogen_demand:  
+        # BECCS:
 
   NL22: # Gelderland
     longitude: 6.012
@@ -125,6 +129,7 @@ nodes:
         curtailment:
         lost_load:
         hydrogen_demand:  
+        # BECCS:
 
   NL23: # Flevoland
     longitude: 5.672633333333333
@@ -148,6 +153,7 @@ nodes:
         curtailment:
         lost_load:
         hydrogen_demand:  
+        # BECCS:
 
   NL31: # Utrecht
     longitude: 4.9873
@@ -171,7 +177,8 @@ nodes:
         hydro.flow_cap_max: 1.8 #source: https://www.microhydropower.net/nl/index_uk.php --> this means no extra hydrogen in NL
         curtailment:
         lost_load:
-        hydrogen_demand:  
+        hydrogen_demand: 
+        # BECCS:
 
   NL32: # Noord Holland
     longitude: 4.748033333333333
@@ -179,8 +186,8 @@ nodes:
     techs:
         demand_power:
         wind_onshore.flow_cap_max: 2162
-        wind_offshore_DC.flow_cap_max: 6000
-        wind_offshore_AC.flow_cap_max: 6978
+        wind_offshore_DC.flow_cap_max: 16000 #the plans for wind on sea after 2032 have been included in the possible expansion
+        wind_offshore_AC.flow_cap_max: 8978
         solar_pv.flow_cap_max: 8882
         li_ion_battery:
         flow_ion_battery:
@@ -195,7 +202,8 @@ nodes:
         SMR:
         curtailment:
         lost_load:
-        hydrogen_demand:  
+        hydrogen_demand: 
+        # BECCS:
 
   NL33: # Zuid Holland
     longitude: 4.452383333333334
@@ -220,7 +228,8 @@ nodes:
         hydro.flow_cap_max: 14 #source: https://www.microhydropower.net/nl/index_uk.php --> this means no extra hydrogen in NL
         curtailment:
         lost_load:
-        hydrogen_demand:  
+        hydrogen_demand: 
+        # BECCS:
 
   NL34: # Zeeland
     longitude: 4.2185
@@ -229,7 +238,7 @@ nodes:
         demand_power:
         wind_onshore.flow_cap_max: 1613 
         wind_offshore_AC.flow_cap_max: 752
-        wind_offshore_DC.flow_cap_max: 0
+        wind_offshore_DC.flow_cap_max: 0 
         solar_pv.flow_cap_max: 5547
         li_ion_battery:
         flow_ion_battery:
@@ -244,7 +253,8 @@ nodes:
         SMR:
         curtailment:
         lost_load:
-        hydrogen_demand:  
+        hydrogen_demand: 
+        # BECCS:
 
   NL41: # Noord Brabant
     longitude: 5.135325
@@ -268,6 +278,7 @@ nodes:
         curtailment:
         lost_load:
         hydrogen_demand:  
+        # BECCS:
 
   NL42: # Limburg
     longitude: 5.9052
@@ -293,6 +304,7 @@ nodes:
         curtailment:
         lost_load:
         hydrogen_demand:  
+        # BECCS:
 
   BEL:
     longitude: 4.378136579035989
@@ -300,6 +312,7 @@ nodes:
     techs:
         import_power:
         export_power:
+        # import_hydrogen:
        
   NOR:
     latitude: 58.0951126628901
@@ -307,6 +320,7 @@ nodes:
     techs:
         import_power:
         export_power:
+        # import_hydrogen:
         
   DEU:
     latitude: 52.02040854483887
@@ -314,6 +328,7 @@ nodes:
     techs:
         import_power:
         export_power:
+        # import_hydrogen:
       
   DNK:
     longitude: 8.401542890776913
@@ -321,6 +336,7 @@ nodes:
     techs:
         import_power:
         export_power:
+        # import_hydrogen:
         
   GBR:
     longitude: 0.8455375006800074
@@ -328,5 +344,6 @@ nodes:
     techs:
         import_power:
         export_power:
+        # import_hydrogen:
         
     
