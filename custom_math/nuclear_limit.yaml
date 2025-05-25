@@ -5,9 +5,17 @@ constraints:
 
   max_nuclear_yearly_cap:
     equations:
-      - expression: sum(flow_cap[carriers=power, techs=nuclear], over=[nodes]) <= 2100 #the max should be 2.1 GW 
+      - expression: sum(flow_cap[carriers=power, techs=nuclear], over=[nodes]) <= 3700 #the max should be 2.1 GW (exiting plant + 1 new plant, ontoher one extra makes 3.7GW)
 
   max_SMR_yearly_cap:
     equations:
       - expression: sum(flow_cap[carriers=power, techs=SMR], over=[nodes]) <= 600 #the max should be 0.6 GW
+
+  max_li_ion_yearly_cap:
+    equations:
+      - expression: sum(flow_cap[carriers=power, techs=li_ion_battery], over=[nodes]) <= 20000 #the max should be 20% of average load
+
+  max_flow_ion_yearly_cap:
+    equations:
+      - expression: sum(flow_cap[carriers=power, techs=flow_ion_battery], over=[nodes]) <= 20000 #the max should be 20% of average load
 
