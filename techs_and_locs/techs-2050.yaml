@@ -43,17 +43,18 @@ techs:
       dims: costs
     # import power-end
     
-  # # # import power hydrogen
-  # import_hydrogen:
-  #   name: "Hydrogen import"
-  #   color: '#ff31fe'
-  #   base_tech: supply
-  #   carrier_out: hydrogen
-  #   cost_flow_out:
-  #     data: 0.231  # kEUR per MWh or another external price
-  #     index: monetary
-  #     dims: costs
-  # #   # import hydrogen-end
+  # # import power hydrogen
+  import_hydrogen:
+    name: "Hydrogen import"
+    color: '#ff31fe'
+    base_tech: supply
+    template: interest_rate_setter
+    carrier_out: hydrogen
+    cost_flow_out:
+      data: 0.231  # kEUR per MWh or another external price
+      index: monetary
+      dims: costs
+  #   # import hydrogen-end
 
 
   hydro_ccgt_new: #data: Gas turbine, combined cycle - extraction - natural gas - large (DEA)
@@ -74,10 +75,10 @@ techs:
       data: 0.00425 # kEUR per MWh
       index: monetary
       dims: costs
-    cost_flow_in:
-      data: 0.231 # kEUR per MWh (green hydrogen price international)
-      index: monetary
-      dims: costs
+    # cost_flow_in:
+    #   data: 0.231 # kEUR per MWh (green hydrogen price international)
+    #   index: monetary
+    #   dims: costs
     om_annual_investment_fraction:
       data: 3.25 # (fixed O&M/nominal investment)*100
       index: monetary
@@ -101,10 +102,10 @@ techs:
       data: 0.00479 # kEUR per MWh
       index: monetary
       dims: costs
-    cost_flow_in:
-      data: 0.231 # kEUR per MWh (green hydrogen price international)
-      index: monetary
-      dims: costs
+    # cost_flow_in:
+    #   data: 0.231 # kEUR per MWh (green hydrogen price international)
+    #   index: monetary
+    #   dims: costs
     om_annual_investment_fraction:
       data: 1.794 # (fixed O&M/nominal investment)*100
       index: monetary
@@ -129,10 +130,6 @@ techs:
       data: 0.00425 # kEUR per MWh
       index: monetary
       dims: costs
-    cost_flow_in:
-      data: 0.231 # kEUR per MWh (green hydrogen price international)
-      index: monetary
-      dims: costs
     om_annual_investment_fraction:
       data: 3.25 # fraction/total investment
       index: monetary
@@ -155,10 +152,6 @@ techs:
       dims: costs
     cost_flow_out:
       data: 0.00479 # kEUR per MWh
-      index: monetary
-      dims: costs
-    cost_flow_in:
-      data: 0.231 # kEUR per MWh (green hydrogen price international)
       index: monetary
       dims: costs
     om_annual_investment_fraction:
@@ -201,7 +194,7 @@ techs:
   #   carrier_out: power
   #   flow_out_eff: 0.32
   #   flow_ramping:
-  # #  flow_cap_max_systemwide: 20000 #MW
+  #   flow_cap_max_systemwide: 20000 #MW
   #   lifetime: 25
   #   cost_flow_cap:
   #     data: 3126  # kEUR per MW (scenariostudie kernenergie)
@@ -456,7 +449,7 @@ techs:
     base_tech: storage
     carrier_in: power
     carrier_out: power
-    storage_discharge_depth: 1.0  # full discharge possible
+    storage_discharge_depth: 0  # full discharge possible
     storage_loss: 0.001  # negligible losses
     flow_cap_per_storage_cap_max: 0.10  # 10% of capacity per day withdrawal rate (THIS SHOULD BE PER HOUR)
     lifetime: 40
@@ -481,7 +474,7 @@ techs:
     base_tech: storage
     carrier_in: hydrogen
     carrier_out: hydrogen
-    storage_discharge_depth: 1.0  # full discharge possible
+    storage_discharge_depth: 0  # full discharge possible
     storage_loss: 0.001  # negligible losses
     flow_cap_per_storage_cap_max: 0.10  # 10% of capacity per day withdrawal rate
     lifetime: 50
@@ -562,7 +555,7 @@ techs:
     color: "#70002a"
     base_tech: demand
     carrier_in: power
-    resource_use_max: 250000 # higher than peak demand
+    resource_use_max: 110000 # higher than peak demand
 
   export_power:
     name: "Power export"
@@ -575,7 +568,7 @@ techs:
       index: monetary
       dims: costs
 
-  hydrogen_demand:
+  hydrogen_demand: #to sell hydrogen
     name: "Hydrogen demand"
     color: "#098607"
     base_tech: demand
