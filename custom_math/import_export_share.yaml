@@ -5,7 +5,7 @@ constraints:
       - expression: sum(flow_out[carriers=power, techs=import_power], over=[timesteps,nodes]) <= 0.2 * sum(flow_out[carriers=power, techs=$gen_techs], over=[techs, timesteps, nodes])
     slices:
         gen_techs:
-            - expression: "[BECCS_rebuilt, CAES, electrolyser, hydro, hydro_ccgt_new, hydro_ccgt_rebuilt, hydro_ocgt_new, import_power, hydro_ocgt_rebuilt, nuclear, solar_pv, wind_offshore_AC, wind_offshore_DC, wind_onshore]" #import power excluded
+            - expression: "[BECCS_rebuilt, CAES, electrolyser, hydro, hydro_ccgt_new, hydro_ccgt_rebuilt, hydro_ocgt_new, import_power, hydro_ocgt_rebuilt, nuclear, solar_pv, wind_offshore_AC, wind_offshore_DC, wind_onshore]" 
 
 
   max_export_share:
@@ -14,4 +14,12 @@ constraints:
       - expression: sum(flow_in[carriers=power, techs=export_power], over=[timesteps,nodes]) <= 0.2 * sum(flow_out[carriers=power, techs=$gen_techs], over=[techs, timesteps, nodes])
     slices:
         gen_techs:
-            - expression: "[BECCS_rebuilt, CAES, electrolyser, hydro, hydro_ccgt_new, hydro_ccgt_rebuilt, hydro_ocgt_new, hydro_ocgt_rebuilt, import_power,  nuclear, solar_pv, wind_offshore_AC, wind_offshore_DC, wind_onshore]" #import power excluded
+            - expression: "[BECCS_rebuilt, CAES, electrolyser, hydro, hydro_ccgt_new, hydro_ccgt_rebuilt, hydro_ocgt_new, hydro_ocgt_rebuilt, import_power,  nuclear, solar_pv, wind_offshore_AC, wind_offshore_DC, wind_onshore]" 
+
+  max_import_hydrogen_share:
+    description: Fix the maximum share of import_hydorgen compared to total generation of hydrogen
+    equations:
+      - expression: sum(flow_out[carriers=hydrogen, techs=import_hydrogen], over=[timesteps,nodes]) <= 0.5 * sum(flow_out[carriers=hydrogen, techs=$hydrogen_techs], over=[techs, timesteps, nodes])
+    slices:
+        hydrogen_techs:
+            - expression: "[electrolyser,import_hydrogen]" 
