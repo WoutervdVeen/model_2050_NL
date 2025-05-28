@@ -1,0 +1,173 @@
+overrides:
+    spores_mode:
+        config.init.broadcast_param_data: false
+        parameters:
+          objective_cost_weights: # makes sure that a 'spores_score' class exists in the model and in the objective
+            data: [1, 0]
+            index: ["monetary", "spores_score"]
+          spores_objective_cost_weights: # defines how to change the model objective once entering the SPORES loop
+            data: [0, 1]
+            index: ["monetary", "spores_score"]
+            dims: costs
+          spores_slack: 0.2
+          spores_cost_max: 1e8 # defines an initially very high (virtually infinite) cost constraint, later linked to the slack
+        config.build.add_math: ["custom_math/nuclear_limit.yaml","custom_math/import_export_share.yaml","custom_math/spores_slack.yaml"]
+
+    
+    define_spores_techs:    
+        parameters:
+            spores_tracker: # defines which techs are going to be subject to the SPORES weighting process
+                data: [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true]
+                index: [BECCS_rebuilt, nuclear, SMR, solar_pv, wind_onshore, wind_offshore_AC, wind_offshore_DC, li_ion_battery, flow_ion_battery, CAES, hydrogen_fuel_cell, electrolyser, hydro_ocgt_rebuilt, hydro_ocgt_new, hydro_ccgt_rebuilt, hydro_ccgt_new]
+                dims: techs
+        templates:    
+            cost_dim_setter:
+                cost_interest_rate:
+                  data: [0.10, 0]
+                  index: ["monetary", "spores_score"]
+                  dims: costs
+        techs:
+            BECCS_rebuilt:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [2758,0], 'index': ['monetary','spores_score'], 'dims': 'costs'}
+            nuclear:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [4100,0], 'index': ['monetary','spores_score'], 'dims': 'costs'}
+            SMR:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [2700,0], 'index': ['monetary','spores_score'], 'dims': 'costs'}
+            solar_pv:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [410,0], 'index': ['monetary','spores_score'], 'dims': 'costs'}
+            wind_onshore:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [1090,0], 'index': ['monetary','spores_score'], 'dims': 'costs'}
+            wind_offshore_AC:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [1986,0], 'index': ['monetary','spores_score'], 'dims': 'costs'}
+            wind_offshore_DC:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [2867,0], 'index': ['monetary','spores_score'], 'dims': 'costs'}
+            li_ion_battery:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [270,0], 'index': ['monetary','spores_score'], 'dims': 'costs'}
+            flow_ion_battery:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [350,0], 'index': ['monetary','spores_score'], 'dims': 'costs'}
+            CAES:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [851,0], 'index': ['monetary','spores_score'], 'dims': 'costs'}
+            hydrogen_fuel_cell:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [850,0], 'index': ['monetary','spores_score'], 'dims': 'costs'}
+            electrolyser:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [395,0], 'index': ['monetary','spores_score'], 'dims': 'costs'}
+            hydro_ocgt_rebuilt:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [182,0], 'index': ['monetary','spores_score'], 'dims': 'costs'}
+            hydro_ocgt_new:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [460,0], 'index': ['monetary','spores_score'], 'dims': 'costs'}
+            hydro_ccgt_rebuilt:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [182,0], 'index': ['monetary','spores_score'], 'dims': 'costs'}
+            hydro_ccgt_new:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [877,0], 'index': ['monetary','spores_score'], 'dims': 'costs'}
+
+
+
+###
+# ---- Overrides for SPORES runs that 'intensify' system featurs of interest ----
+###
+
+    spores_mode_intensify_max:
+        config.init.broadcast_param_data: false
+        parameters:
+          objective_cost_weights: # makes sure that a 'spores_score' class exists in the model and in the objective
+            data: [1, 0, 0]
+            index: ["monetary", "spores_score", "intensification"]
+          spores_objective_cost_weights: # defines how to change the model objective once entering the SPORES loop
+            data: [0, 1, -1000]
+            index: ["monetary", "spores_score", "intensification"]
+            dims: costs
+          spores_slack: 0.2
+          spores_cost_max: 1e8 # defines an initially very high (virtually infinite) cost constraint, later linked to the slack
+        config.build.add_math: ["custom_math/nuclear_limit.yaml","custom_math/import_export_share.yaml","custom_math/spores_slack.yaml"]
+
+    spores_mode_intensify_min:
+        config.init.broadcast_param_data: false
+        parameters:
+          objective_cost_weights: # makes sure that a 'spores_score' class exists in the model and in the objective
+            data: [1, 0, 0]
+            index: ["monetary", "spores_score", "intensification"]
+          spores_objective_cost_weights: # defines how to change the model objective once entering the SPORES loop
+            data: [0, 1, 1000]
+            index: ["monetary", "spores_score", c]
+            dims: costs
+          spores_slack: 0.2
+          spores_cost_max: 1e8 # defines an initially very high (virtually infinite) cost constraint, later linked to the slack
+        config.build.add_math: ["custom_math/nuclear_limit.yaml","custom_math/import_export_share.yaml","custom_math/spores_slack.yaml"]
+
+    define_spores_techs_intensify_flow_ion_battery:    
+        parameters:
+            spores_tracker: # defines which techs are going to be subject to the SPORES weighting process
+                data: [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true]
+                index: [BECCS_rebuilt, nuclear, SMR, solar_pv, wind_onshore, wind_offshore_AC, wind_offshore_DC, li_ion_battery, flow_ion_battery, CAES, hydrogen_fuel_cell, electrolyser, hydro_ocgt_rebuilt, hydro_ocgt_new, hydro_ccgt_rebuilt, hydro_ccgt_new]
+                dims: techs
+        templates:    
+            cost_dim_setter:
+                cost_interest_rate:
+                  data: [0.10, 0, 0]
+                  index: ["monetary", "spores_score", "intensification"]
+                  dims: costs
+        techs:
+            BECCS_rebuilt:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [2758,0,0], 'index': ['monetary','spores_score','intensification'], 'dims': 'costs'}
+            nuclear:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [4100,0,0], 'index': ['monetary','spores_score','intensification'], 'dims': 'costs'}
+            SMR:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [2700,0,0], 'index': ['monetary','spores_score','intensification'], 'dims': 'costs'}
+            solar_pv:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [410,0,0], 'index': ['monetary','spores_score','intensification'], 'dims': 'costs'}
+            wind_onshore:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [1090,0,0], 'index': ['monetary','spores_score','intensification'], 'dims': 'costs'}
+            wind_offshore_AC:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [1986,0,0], 'index': ['monetary','spores_score','intensification'], 'dims': 'costs'}
+            wind_offshore_DC:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [2867,0,0], 'index': ['monetary','spores_score','intensification'], 'dims': 'costs'}
+            li_ion_battery:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [270,0,0], 'index': ['monetary','spores_score','intensification'], 'dims': 'costs'}
+            flow_ion_battery:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [350,0,1000], 'index': ['monetary','spores_score','intensification'], 'dims': 'costs'}
+            CAES:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [851,0,0], 'index': ['monetary','spores_score','intensification'], 'dims': 'costs'}
+            hydrogen_fuel_cell:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [850,0,0], 'index': ['monetary','spores_score','intensification'], 'dims': 'costs'}
+            electrolyser:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [395,0,0], 'index': ['monetary','spores_score','intensification'], 'dims': 'costs'}
+            hydro_ocgt_rebuilt:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [182,0,0], 'index': ['monetary','spores_score','intensification'], 'dims': 'costs'}
+            hydro_ocgt_new:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [460,0,0], 'index': ['monetary','spores_score','intensification'], 'dims': 'costs'}
+            hydro_ccgt_rebuilt:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [182,0,0], 'index': ['monetary','spores_score','intensification'], 'dims': 'costs'}
+            hydro_ccgt_new:
+                template: cost_dim_setter
+                cost_flow_cap: {'data': [877,0,0], 'index': ['monetary','spores_score','intensification'], 'dims': 'costs'}
