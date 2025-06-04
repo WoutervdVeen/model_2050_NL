@@ -208,7 +208,7 @@ nodes:
         curtailment:
         lost_load:
         hydrogen_demand: 
-        # BECCS:
+        hydrogen_cavern.flow_cap_max: 11750 #potential in north sea
 
   NL33: # Zuid Holland
     longitude: 4.452383333333334
@@ -234,7 +234,7 @@ nodes:
         curtailment:
         lost_load:
         hydrogen_demand: 
-        # BECCS:
+        hydrogen_cavern.flow_cap_max: 11750 #potential in north sea
 
   NL34: # Zeeland
     longitude: 4.2185

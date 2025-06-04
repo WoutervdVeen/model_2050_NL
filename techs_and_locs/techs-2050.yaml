@@ -51,7 +51,7 @@ techs:
     template: interest_rate_setter
     carrier_out: hydrogen
     cost_flow_out:
-      data: 0.231  # kEUR per MWh or another external price
+      data: 0.231  # kEUR per MWh green hydrogen price international
       index: monetary
       dims: costs
   #   # import hydrogen-end
@@ -424,7 +424,7 @@ techs:
     carrier_out: power    
     storage_discharge_depth: 0.1
     lifetime: 13  # 3000 charge cycles
-    flow_cap_per_storage_cap_max: 0.1 #takes 10 hours for discharging 
+    flow_cap_per_storage_cap_max: 0.025 #takes 40 hours for discharging (was 0.1) II3050
     flow_out_eff: 0.78
     flow_in_eff: 0.99
     storage_loss: 0.001  # 0% loss per hour assumedcosts: 0.1%, otherwise it does not discharge
@@ -476,7 +476,7 @@ techs:
     carrier_out: hydrogen
     storage_discharge_depth: 0  # full discharge possible
     storage_loss: 0.001  # negligible losses
-    flow_cap_per_storage_cap_max: 0.10  # 10% of capacity per day withdrawal rate
+    flow_cap_per_storage_cap_max: 0.004  # 10% of capacity per day withdrawal rate (before this was 0.1) source: "Large-scale Hydrogen Storage in Salt Caverns", TNO
     lifetime: 50
     cost_storage_cap:
       data: 1.28  # kEUR per MWh

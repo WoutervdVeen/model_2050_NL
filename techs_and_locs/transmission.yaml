@@ -28,7 +28,7 @@ templates:
     cost_flow_cap:
       data: 942  # kEUR per MW
       index: monetary
-      dims: costs
+      dims: costs    
   hydrogen_transmission:
     name: "Hydrogen transmission"
     color: "#9DA9C4"
